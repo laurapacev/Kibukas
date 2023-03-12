@@ -49,47 +49,8 @@ return (
 
 function SignOut() {
   return auth.currentUser && (
-
-    <button onClick={() => auth.signOut()}>Sign Out</button>
+    <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
   )
 }
-
-function ChatRoom() {
-
-  const messagesRef = firestore.collection('messages');
-  const query = messagesRef.orderBy('createdAt').limit(25);
-
-  const [messages] = useCollectionData(query, {idField: 'id'});
-
-  return ( 
-    <>
-      <div>
-        {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
-      </div>
-      <form>
-
-        <input />
-
-        <button type="submit">🍉</button>
-      </form>
-
-    </>
-  )
-}
-
-function ChatMessage(props) {
-  const { text, uid, photoURL } = props.message;
-
-  const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
-  
-  return (
-    <div className={`message ${messageClass}`}>
-        <img src={photoURL} />
-        <p>{text}</p>
-    </div>
-
-  )
-}
-
 
 export default App;
