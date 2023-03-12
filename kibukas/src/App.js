@@ -46,13 +46,13 @@ function SignIn() {
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
-}
+  }
 
-return (
-  <>
+  return (
+    <>
       <button className="sign-in" onClick={signInWithGoogle}>Prisijungti su Google paskyra</button>
-  </>
-)
+    </>
+  )
 
 }
 
