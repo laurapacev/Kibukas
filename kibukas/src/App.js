@@ -33,14 +33,15 @@ function App() {
 }
 
 function SignIn() {
-  const signInWithGoodle = () => {
+
+  const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
 }
 
 return (
   <>
-    <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
+      <button className="sign-in" onClick={signInWithGoogle}>Prisijungti su Google paskyra</button>
   </>
 )
 
