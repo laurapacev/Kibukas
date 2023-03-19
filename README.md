@@ -8,7 +8,6 @@ git clone https://github.com/laurapacev/Kibukas.git
 ```
 
 ## Instructions and workflow for repository
-
 **1. Switch to develop branch**
 ```
 git checkout develop
@@ -34,4 +33,25 @@ git commit -m 'commit message'
 **6. Pull latest version**
 ```
 git pull
+```
+
+## Instructions for Vue project
+**1. From project root, navigate to Vue app**
+```
+cd app
+```
+
+**2. Install required dependencies**
+```
+npm install
+```
+
+**3. Run project in local environment**
+```
+npm run dev
+```
+
+**EXTRA. Build project**
+```
+npm run build
 ```
