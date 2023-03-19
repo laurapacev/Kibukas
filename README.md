@@ -1,6 +1,12 @@
 # Kibukas develop branch
 Branch is used for development purpose. After making a final version that meets Jira sprint goal, this branch must be merging with main branch.
 
+## Get started
+Clone GitHub repository to local environment
+```
+git clone https://github.com/laurapacev/Kibukas.git
+```
+
 ## Instructions and workflow for repository
 
 **1. Switch to develop branch**
