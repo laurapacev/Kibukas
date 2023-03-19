@@ -1,13 +1,26 @@
 <template>
   <div id="app">
+    <navigation></navigation>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Navigation from './components/Navigation.vue';
+
 export default {
-  name: 'app'
+  components: { Navigation },
+  name: 'app',
+  data () {
+    return {
+    }
+  }
 }
 </script>
 
-<style></style>
+<style>
+html, body {
+  height: 100%;
+  width: 100%;
+}
+</style>
