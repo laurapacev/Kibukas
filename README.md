@@ -1,7 +1,7 @@
 # Kibukas develop branch
 Branch is used for development purpose. After making a final version that meets Jira sprint goal, this branch must be merging with main branch.
 
-## Instructions and workflow
+## Instructions and workflow for repository
 
 **1. Switch to develop branch**
 ```
