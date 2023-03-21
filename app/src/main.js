@@ -4,8 +4,9 @@ import App from './App.vue'
 // Routes
 import router from './routes'
 
+Vue.config.productionTip = false
+
 new Vue({
-  el: '#app',
+  render: h => h(App),
   router,
-  render: h => h(App)
-})
+}).$mount('#app')

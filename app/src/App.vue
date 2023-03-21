@@ -8,15 +8,14 @@
 </template>
 
 <script>
-import Navigation from './components/Navigation.vue';
+import Navigation from './components/Navigation.vue'
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
 
 export default {
   components: { Navigation },
-  name: 'app',
-  data () {
-    return {
-    }
-  }
+  name: 'App',
 }
 </script>
 
