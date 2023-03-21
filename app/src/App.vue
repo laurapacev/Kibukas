@@ -24,5 +24,6 @@ export default {
 html, body {
   height: 100%;
   width: 100%;
+  background-color: rgb(40, 37, 53);
 }
 </style>
