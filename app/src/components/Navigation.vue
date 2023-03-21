@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar bg-light">
+  <nav class="header navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        Kibukas
+        <b>KIBUKAS</b>
       </a>
     </div>
   </nav>
@@ -10,4 +10,9 @@
 
 <script></script>
 
-<style></style>
+<style>
+.header {
+  background-color: rgba(24, 23, 23, 1) !important;
+  color: #ffffff !important;
+}
+</style>
