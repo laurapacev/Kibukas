@@ -51,7 +51,7 @@ npm install
 npm run dev
 ```
 
-**EXTRA. Build project**
+**EXTRA. Build project (might be required for random test cases)**
 ```
 npm run build
 ```
