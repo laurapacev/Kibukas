@@ -48,8 +48,10 @@ npm install
 
 **3. Run project in local environment**
 ```
-npm run dev
+npm run serve
 ```
+
+**4. Local and network urls will be displayed in console**
 
 **EXTRA. Build project (might be required for random test cases)**
 ```
