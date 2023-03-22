@@ -2,9 +2,7 @@
   <div id="app">
     <navigation></navigation>
     <div class="container">
-      <!-- <router-view></router-view> -->
-      <button v-if="!isUserLoggedIn()" @click="signInWithGoogle()">Sign In</button>
-      <button @click="test()">test</button>
+      <router-view></router-view>
     </div>
   </div>
 </template>
