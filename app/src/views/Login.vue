@@ -1,7 +1,7 @@
 <template>
   <div class="container-login">
-    <button v-if="!isUserLoggedIn()" class="sign-in">Prisijungti su Google paskyra</button>
-    <p v-else>Prisijungta</p>
+    <button v-if="!isUserLoggedIn()" @click="signInWithGoogle()"  class="sign-in">Sign In</button>
+    <button @click="test()">test</button>
   </div>
 </template>
 
