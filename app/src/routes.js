@@ -11,12 +11,19 @@ let routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/login',
         name: 'Login',
-        component: Login
+        component: Login,
+        meta: {
+            requiresAuth: false,
+            requiresNoAuth: true
+        }
     }
 ];
 
