@@ -35,8 +35,8 @@ body {
 
 main {
   padding: 10px;
-  height: 80vh;
-  margin: 10vh 0 10vh;
+  height: 100vh;
+  margin: 100vh 0 100vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
