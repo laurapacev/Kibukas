@@ -32,6 +32,10 @@ export const Firebase = {
         getAuth()
         {
             return auth
+        },
+        getProvider()
+        {
+            return provider
         }
     }
 }
