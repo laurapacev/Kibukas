@@ -33,18 +33,18 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-    const storeInit = router.app.$store.dispatch('init')
-    //console.log(router.app.$store.getters.isUserLoggedIn)
     if (to.meta.requiresAuth) {
-        storeInit.then()
-        .catch(e => {
-          // Handle error
-        })
-        console.log("2")
-        console.log(router.app.$store.state.user.user)
         if(!router.app.$store.getters.isUserLoggedIn)
             router.push({ path: '/login', name: 'Login' })
-    } 
+    }
+    else {
+        next()
+    }
+
+    if(to.meta.requiresNoAuth && router.app.$store.getters.isUserLoggedIn)
+    {
+        router.push({ path: '/', name: 'Home' })
+    }
     else {
       next()
     }
