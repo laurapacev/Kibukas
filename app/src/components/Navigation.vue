@@ -1,14 +1,10 @@
 <template>
   <nav class="header navbar navbar-dark bg-dark">
     <div class="container d-flex flex-row">
-        <div class="">
           <a class="navbar-brand" href="#">
             <b>KIBUKAS</b>
           </a>
-        </div>
-        <div class="">
-          <button v-if="this.$store.getters.isUserLoggedIn" @click="logout()">Logout</button>
-        </div>
+          <button v-show="this.$store.getters.isUserLoggedIn == true" @click="logout()">Logout</button>
     </div>
   </nav>
 </template>
@@ -21,7 +17,12 @@ export default {
   mixins: [ Firebase ],
   methods: {
     logout() {
-      console.log(this.getAuth().signOut())
+      this.getAuth().signOut().then(() => {
+        this.$store.commit('logoutUser')
+        this.$router.push('/login')
+      }).catch((error) => {
+        // An error happened.
+      });
     }
   }
 }
