@@ -9,14 +9,6 @@ Vue.use(VueRouter);
 
 let routes = [
     {
-        path: '/',
-        name: 'Home',
-        component: Home,
-        meta: {
-            requiresAuth: true
-        }
-    },
-    {
         path: '/login',
         name: 'Login',
         component: Login,
@@ -24,10 +16,38 @@ let routes = [
             requiresAuth: false,
             requiresNoAuth: true
         }
+    },    
+    {
+        path: '/',
+        name: 'Home',
+        component: Home,
+        meta: {
+            requiresAuth: true
+        }
     }
 ];
 
-export default new VueRouter({
+const router = new VueRouter({
     mode: 'history',
     routes
 });
+
+router.beforeEach(async (to, from, next) => {
+    const storeInit = router.app.$store.dispatch('init')
+    //console.log(router.app.$store.getters.isUserLoggedIn)
+    if (to.meta.requiresAuth) {
+        storeInit.then()
+        .catch(e => {
+          // Handle error
+        })
+        console.log("2")
+        console.log(router.app.$store.state.user.user)
+        if(!router.app.$store.getters.isUserLoggedIn)
+            router.push({ path: '/login', name: 'Login' })
+    } 
+    else {
+      next()
+    }
+})
+
+export default router
