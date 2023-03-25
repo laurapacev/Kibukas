@@ -24,6 +24,10 @@ export default {
         setUser(state, usr)
         {
            state.user = usr
+        },
+        logoutUser(state,)
+        {
+           state.user = []
         }
     }
 }
