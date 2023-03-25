@@ -1,38 +1,22 @@
 <template>
   <div class="container-login">
-    <button v-if="!this.$store.getters.isUserLoggedIn" @click="signInWithGoogle()"  class="sign-in">Sign In</button>
-    <button @click="test()">test</button>
+    <button v-if="!this.$store.getters.isUserLoggedIn" @click="signInWithGoogle()"  class="sign-in-btn">Sign In</button>
   </div>
 </template>
 
 <script>
-// Firebase
 import router from "@/routes";
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAD1WEV3K283NKoCXsRxaBk--KV9piKpCc",
-  authDomain: "kibukas-68495.firebaseapp.com",
-  projectId: "kibukas-68495",
-  storageBucket: "kibukas-68495.appspot.com",
-  messagingSenderId: "718635856365",
-  appId: "1:718635856365:web:1e462bc10bf8fcd19277e4",
-  measurementId: "G-H087EJPNHJ"
-};
-
-// Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(firebaseApp);
-const provider = new GoogleAuthProvider();
+// Mixins
+import { Firebase } from '../mixins/Firebase'
 
 export default {
+  mixins: [ Firebase ],
   methods: {
     signInWithGoogle()
     {
-      signInWithPopup(auth, provider)
+      signInWithPopup(this.getAuth(), this.getProvider())
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -42,6 +26,7 @@ export default {
         console.log(user)
         // IdP data available using getAdditionalUserInfo(result)
         // ...
+        router.push({ path: '/', name: 'Home' })
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -52,10 +37,6 @@ export default {
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
-    },
-    created()
-    {
-      console.log("login")
     }
   }
 }
@@ -65,22 +46,17 @@ export default {
 .container-login {
   margin-top: 50px;
 }
-.sign-in {
+.sign-in-btn {
   display: block;
-  color: #282c34;
   background: white;
-  max-width: 400px;
-  margin: 0 auto;
-}
-button {
-  background-color: #282c34;
   border: none;
-  color: white;
+  color: #282c34;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   cursor: pointer;
   font-size: 1.25rem;
+  max-width: 400px;
+  margin: 0 auto;
 }
 </style>
