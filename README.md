@@ -15,7 +15,7 @@ git checkout develop
 
 **2. Pull latest version**
 ```
-git pull
+git pull origin develop
 ```
 
 **3. Make changes locally**
@@ -37,7 +37,7 @@ git push origin develop
 
 **7. Pull latest version**
 ```
-git pull
+git pull origin develop
 ```
 
 ## Instructions for Vue project
