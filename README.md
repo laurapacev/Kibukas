@@ -30,7 +30,12 @@ git add .
 git commit -m 'commit message'
 ```
 
-**6. Pull latest version**
+**6. Push changes to GitHub**
+```
+git push origin develop
+```
+
+**7. Pull latest version**
 ```
 git pull
 ```
