@@ -11,6 +11,12 @@
     <form class="form-container">
       <input type="text" class="form-control" placeholder="Name">
       <button type="submit" class="sign-in-btn">Register</button>
+
+
+      /* not sure kaip cia dirbtu, + man meta errora be savo pacios additions, todel kol kas taip palieku, nors pagal ideja kaip supratau reikia naudot v-if */
+      <input type="text" class="form-control1" placholder="Repeat your password">
+      <button type="submit" class="sign-in-btn">Register</button>
+
     </form>
 
   </div>
@@ -41,6 +47,11 @@ export default {
 }
 .form-control {
   height: 50px;
+  border-radius: 0px;
+  margin-bottom: 20px;
+}
+.form-control1 {
+  height: 60px;
   border-radius: 0px;
   margin-bottom: 20px;
 }
