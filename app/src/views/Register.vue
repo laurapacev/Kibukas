@@ -1,4 +1,11 @@
 <template>
+  <header>
+    <h1>
+      Registracija
+    </h1>
+  </header>
+
+
   <div class="container-login">
 
     <form class="form-container">
