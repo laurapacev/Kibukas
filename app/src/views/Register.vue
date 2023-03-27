@@ -1,7 +1,7 @@
 <template>
   <div class="container-login">
 
-    <form>
+    <form class="form-container">
       <button type="submit" class="sign-in-btn">Register</button>
     </form>
 
@@ -26,6 +26,10 @@ export default {
 <style>
 .container-login {
   margin-top: 50px;
+}
+.form-container {
+  margin: 0 auto;
+  width: 400px;
 }
 .sign-in-btn {
   display: block;
