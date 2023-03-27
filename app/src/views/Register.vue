@@ -2,6 +2,7 @@
   <div class="container-login">
 
     <form class="form-container">
+      <input type="text" class="form-control" placeholder="Name">
       <button type="submit" class="sign-in-btn">Register</button>
     </form>
 
@@ -30,6 +31,11 @@ export default {
 .form-container {
   margin: 0 auto;
   width: 400px;
+}
+.form-control {
+  height: 50px;
+  border-radius: 0px;
+  margin-bottom: 20px;
 }
 .sign-in-btn {
   display: block;
