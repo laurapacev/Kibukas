@@ -1,41 +1,64 @@
 <template>
-  <header>
-    <h1>
-      Registracija
-    </h1>
-  </header>
-
-
-  <div class="container-login">
-
-    <form class="form-container">
-      <input type="text" class="form-control" placeholder="Name">
-      <button type="submit" class="sign-in-btn">Register</button>
-
-
-      /* not sure kaip cia dirbtu, + man meta errora be savo pacios additions, todel kol kas taip palieku, nors pagal ideja kaip supratau reikia naudot v-if */
-      <input type="text" class="form-control1" placholder="Repeat your password">
-      <button type="submit" class="sign-in-btn">Register</button>
-
-    </form>
-
+  <div>
+    <header>
+      <h1>
+        Registracija
+      </h1>
+    </header>
+    <div class="container-login">
+      <form class="form-container" @submit.prevent="register">
+        <input type="text" class="form-control" placeholder="Name">
+        <input v-bind:type="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password">
+        <input v-bind:type="showPassword ? 'text' : 'password'" class="form-control" placeholder="Repeat Password">
+        <button type="button" class="toggle-password-btn" @click="showPassword = !showPassword">{{ showPassword ? 'Hide' : 'Show' }} Password</button>
+        <button type="submit" class="sign-in-btn">Register</button>
+        <!-- <button type="button" class="toggle-password-btn" @click="showPassword = !showPassword">{{ showPassword ? 'Hide' : 'Show' }} Password</button> -->
+        <!-- <button type="submit" class="sign-in-btn" v-if="!showPassword" @click.prevent="showPassword = true">Enter Password</button> -->
+        <!-- <button type="submit" class="sign-in-btn" v-if="showPassword">Register?</button> -->
+      </form>
+    </div>
   </div>
 </template>
 
+<!--  -->
 <script>
-import router from "@/routes";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
-// Mixins
-import { Firebase } from '../mixins/Firebase'
-
 export default {
-  mixins: [ Firebase ],
+  data() {
+    return {
+      showPassword: false
+    }
+  },
   methods: {
-
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+      console.log('Password visibility toggled');
+    }
   }
 }
 </script>
+<!--  -->
+<script>
+export default {
+  data() {
+    return {
+      password: '',
+      repeatPassword: '',
+      showPassword: false
+    }
+  },
+  methods: {
+    register() {
+      if (this.password === this.repeatPassword) {
+        // passwords match, continue with registration logic
+      } else {
+        this.errorMessage = 'Passwords do not match.';
+        // passwords don't match, show error message or take other action
+      }
+    }
+  }
+}
+</script>
+
 
 <style>
 .container-login {
@@ -45,6 +68,10 @@ export default {
   margin: 0 auto;
   width: 400px;
 }
+.error-message {
+    color: red;
+    margin-top: 10px;
+  }
 .form-control {
   height: 50px;
   border-radius: 0px;
@@ -66,6 +93,6 @@ export default {
   cursor: pointer;
   font-size: 1.25rem;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 50px auto;
 }
 </style>
