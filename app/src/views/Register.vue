@@ -14,15 +14,10 @@
       <input type="password" class="form-control" placeholder="Repeat password"  v-model="re_password">
       <input type="button" class="sign-in-btn" @click="this.register" value="Register">
     </form>
-
   </div>
 </template>
 
 <script>
-import router from "@/routes";
-import { registerVersion } from "@firebase/app";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
 // Mixins
 import { Firebase } from '../mixins/Firebase'
 
@@ -86,10 +81,34 @@ export default {
       this.success = true
 
       return true
+
     }
   }
 }
 </script>
+<!--  -->
+<script>
+export default {
+  data() {
+    return {
+      password: '',
+      repeatPassword: '',
+      showPassword: false
+    }
+  },
+  methods: {
+    register() {
+      if (this.password === this.repeatPassword) {
+        // passwords match, continue with registration logic
+      } else {
+        this.errorMessage = 'Passwords do not match.';
+        // passwords don't match, show error message or take other action
+      }
+    }
+  }
+}
+</script>
+
 
 <style>
 .container-login {
@@ -99,8 +118,17 @@ export default {
   margin: 0 auto;
   width: 400px;
 }
+.error-message {
+    color: red;
+    margin-top: 10px;
+  }
 .form-control {
   height: 50px;
+  border-radius: 0px;
+  margin-bottom: 20px;
+}
+.form-control1 {
+  height: 60px;
   border-radius: 0px;
   margin-bottom: 20px;
 }
@@ -115,7 +143,7 @@ export default {
   cursor: pointer;
   font-size: 1.25rem;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 50px auto;
 }
 .reg-heading {
   text-align: center;
