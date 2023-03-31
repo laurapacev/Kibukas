@@ -3,7 +3,7 @@
 
     <form class="form-container">
       <h1 class="reg-heading">REGISTRATION</h1>
-      <div v-if="this.isAlertSet() == true && this.success == false" class="alert alert-warning" role="alert">{{ alert }}</div>
+      <div v-if="isAlertSet() == true && this.success == false" class="alert alert-warning" role="alert">{{ alert }}</div>
 
       <div v-if="this.success == true" class="alert alert-success" role="alert">{{ alert }}</div>
 
@@ -44,7 +44,17 @@ export default {
     register()
     {
       if(!this.checkInput())
+      {
+        this.success = false
         return
+      }
+
+      if(!this.doesPasswordsMatch())
+      {
+        this.alert = "Passwords don't match"
+        this.success = false
+        return
+      }
 
       this.alert = 'Registration data was successfully supplied'
       this.success = true
@@ -82,28 +92,12 @@ export default {
 
       return true
 
-    }
-  }
-}
-</script>
-<!--  -->
-<script>
-export default {
-  data() {
-    return {
-      password: '',
-      repeatPassword: '',
-      showPassword: false
-    }
-  },
-  methods: {
-    register() {
-      if (this.password === this.repeatPassword) {
-        // passwords match, continue with registration logic
-      } else {
-        this.errorMessage = 'Passwords do not match.';
-        // passwords don't match, show error message or take other action
-      }
+    },
+    doesPasswordsMatch()
+    {
+      if(this.password == this.re_password)
+        return true
+      return false
     }
   }
 }
