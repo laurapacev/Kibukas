@@ -2,8 +2,17 @@
   <div class="container-login">
 
     <form class="form-container">
-      <input type="text" class="form-control" placeholder="Name">
-      <button type="submit" class="sign-in-btn">Register</button>
+      <h1 class="reg-heading">REGISTRATION</h1>
+      <div v-if="this.isAlertSet() == true && this.success == false" class="alert alert-warning" role="alert">{{ alert }}</div>
+
+      <div v-if="this.success == true" class="alert alert-success" role="alert">{{ alert }}</div>
+
+
+      <input type="text" class="form-control" placeholder="Name" v-model="name">
+      <input type="text" class="form-control" placeholder="Email"  v-model="email">
+      <input type="password" class="form-control" placeholder="Password"  v-model="password">
+      <input type="password" class="form-control" placeholder="Repeat password"  v-model="re_password">
+      <input type="button" class="sign-in-btn" @click="this.register" value="Register">
     </form>
 
   </div>
@@ -11,6 +20,7 @@
 
 <script>
 import router from "@/routes";
+import { registerVersion } from "@firebase/app";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 // Mixins
@@ -18,8 +28,65 @@ import { Firebase } from '../mixins/Firebase'
 
 export default {
   mixins: [ Firebase ],
-  methods: {
+  data() {
+    return {
+      name: null,
+      email: null,
+      password: null,
+      re_password: null,
+      alert: null,
 
+      success: false
+    }
+  },
+  methods: {
+    isAlertSet()
+    {
+      if(this.alert == null)
+        return false
+      return true
+    },
+    register()
+    {
+      if(!this.checkInput())
+        return
+
+      this.alert = 'Registration data was successfully supplied'
+      this.success = true
+    }
+    ,
+    checkInput()
+    {
+      this.success = false
+      if(this.name == null || this.name == "")
+      {
+        this.alert = 'Empty name field'
+        return false
+      }
+
+
+      if(this.email == null || this.email == "")
+      {
+        this.alert = 'Empty email field'
+        return false
+      }
+
+      if(this.password == null || this.password == "")
+      {
+        this.alert = 'Empty password field'
+        return false
+      }
+
+      if(this.re_password == null || this.re_password == "")
+      {
+        this.alert = 'Empty repeat password field'
+        return false
+      } 
+
+      this.success = true
+
+      return true
+    }
   }
 }
 </script>
@@ -49,5 +116,9 @@ export default {
   font-size: 1.25rem;
   max-width: 400px;
   margin: 0 auto;
+}
+.reg-heading {
+  text-align: center;
+  margin-bottom: 60px;
 }
 </style>
