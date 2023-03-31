@@ -1,6 +1,9 @@
 <template>
   <div class="container-login">
-    <button v-if="!this.$store.getters.isUserLoggedIn" @click="signInWithGoogle()"  class="sign-in-btn">Sign In</button>
+
+    <form class="form-container">
+      <input v-if="!this.$store.getters.isUserLoggedIn" @click="signInWithGoogle()" type="button" class="sign-in-btn" value="Google Auth Login">
+    </form>
   </div>
 </template>
 
@@ -58,5 +61,15 @@ export default {
   font-size: 1.25rem;
   max-width: 400px;
   margin: 0 auto;
+}
+.hr-span {
+  text-align: center;
+  display: block;
+  font-size: 13px;
+  position: relative;
+  top: 25px;
+}
+.hr-style {
+  margin-bottom: 40px;
 }
 </style>
