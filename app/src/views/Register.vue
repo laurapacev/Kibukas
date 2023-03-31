@@ -3,10 +3,8 @@
 
     <form class="form-container">
       <h1 class="reg-heading">REGISTRATION</h1>
-      <div v-if="isAlertSet() == true && this.success == false" class="alert alert-warning" role="alert">{{ alert }}</div>
 
-      <div v-if="this.success == true" class="alert alert-success" role="alert">{{ alert }}</div>
-
+      <alert v-if="getAlertShow() == true" :type="getAlertType()">{{ getAlertMsg() }}</alert>
 
       <input type="text" class="form-control" placeholder="Name" v-model="name">
       <input type="text" class="form-control" placeholder="Email"  v-model="email">
@@ -18,11 +16,16 @@
 </template>
 
 <script>
+// Componets
+import Alert from '../components/Alert.vue'
+
 // Mixins
+import { AlertMixin } from '../mixins/AlertMixin'
 import { Firebase } from '../mixins/Firebase'
 
 export default {
-  mixins: [ Firebase ],
+  components: { Alert },
+  mixins: [ AlertMixin, Firebase ],
   data() {
     return {
       name: null,
@@ -51,13 +54,11 @@ export default {
 
       if(!this.doesPasswordsMatch())
       {
-        this.alert = "Passwords don't match"
-        this.success = false
+        this.showAlert(true, "Passwords don't match", 'warning')
         return
       }
 
-      this.alert = 'Registration data was successfully supplied'
-      this.success = true
+      this.showAlert(true, 'Registration data was successfully supplied', 'success')
     }
     ,
     checkInput()
@@ -65,30 +66,28 @@ export default {
       this.success = false
       if(this.name == null || this.name == "")
       {
-        this.alert = 'Empty name field'
+        this.showAlert(true, 'Empty name field', 'warning')
         return false
       }
 
 
       if(this.email == null || this.email == "")
       {
-        this.alert = 'Empty email field'
+        this.showAlert(true, 'Empty email field', 'warning')
         return false
       }
 
       if(this.password == null || this.password == "")
       {
-        this.alert = 'Empty password field'
+        this.showAlert(true, 'Empty password field', 'warning')
         return false
       }
 
       if(this.re_password == null || this.re_password == "")
       {
-        this.alert = 'Empty repeat password field'
+        this.showAlert(true, 'Empty repeat password field', 'warning')
         return false
-      } 
-
-      this.success = true
+      }
 
       return true
 
