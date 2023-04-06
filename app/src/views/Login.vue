@@ -8,12 +8,12 @@
 
       <input type="text" class="form-control" placeholder="Email"  v-model="email">
       <input type="password" class="form-control" placeholder="Password"  v-model="password">
-      <input type="button" class="sign-in-btn" @click="login()" value="Login">
+      <input type="button" class="button" @click="login()" value="Login">
 
       <span class="hr-span">OR LOGIN WITH</span>
       <hr class="hr-style"/>
 
-      <input @click="signInWithGoogle()" type="button" class="sign-in-btn" value="Google Auth Login">
+      <input @click="signInWithGoogle()" type="button" class="button" value="Google Auth Login">
     </form>
   </div>
 </template>
@@ -95,19 +95,6 @@ export default {
 .container-login {
   margin-top: 50px;
 }
-.sign-in-btn {
-  display: block;
-  background: white;
-  border: none;
-  color: #282c34;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 1.25rem;
-  max-width: 400px;
-  margin: 0 auto;
-}
 .hr-span {
   text-align: center;
   display: block;
@@ -116,6 +103,6 @@ export default {
   top: 25px;
 }
 .hr-style {
-  margin-bottom: 70px;
+  margin-bottom: 35px;
 }
 </style>
