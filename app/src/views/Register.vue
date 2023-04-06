@@ -10,7 +10,7 @@
       <input type="text" class="form-control" placeholder="Email"  v-model="email">
       <input type="password" class="form-control" placeholder="Password"  v-model="password">
       <input type="password" class="form-control" placeholder="Repeat password"  v-model="re_password">
-      <input type="button" class="sign-in-btn" @click="this.register" value="Register">
+      <input type="button" class="button" @click="this.register" value="Register">
     </form>
   </div>
 </template>
@@ -95,37 +95,12 @@ export default {
 .container-login {
   margin-top: 50px;
 }
-.form-container {
-  margin: 0 auto;
-  width: 400px;
-}
+
 .error-message {
-    color: red;
-    margin-top: 10px;
-  }
-.form-control {
-  height: 50px;
-  border-radius: 0px;
-  margin-bottom: 20px;
+  color: red;
+  margin-top: 10px;
 }
-.form-control1 {
-  height: 60px;
-  border-radius: 0px;
-  margin-bottom: 20px;
-}
-.sign-in-btn {
-  display: block;
-  background: white;
-  border: none;
-  color: #282c34;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 1.25rem;
-  max-width: 400px;
-  margin: 50px auto;
-}
+
 .reg-heading {
   text-align: center;
   margin-bottom: 60px;
