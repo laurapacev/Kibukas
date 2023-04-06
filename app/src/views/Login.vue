@@ -2,7 +2,8 @@
   <div class="container-login">
 
     <form class="form-container">
-      <input v-if="!this.$store.getters.isUserLoggedIn" @click="signInWithGoogle()" type="button" class="sign-in-btn" value="Google Auth Login">
+      <h1 class="reg-heading">LOGIN</h1>
+      <input @click="signInWithGoogle()" type="button" class="sign-in-btn" value="Google Auth Login">
     </form>
   </div>
 </template>
