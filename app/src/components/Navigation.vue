@@ -5,11 +5,11 @@
             <b>KIBUKAS</b>
           </a>
           <div v-if="this.$store.getters.isUserLoggedIn == false">
-            <router-link class="nav-btn" to="/login">Login</router-link>
-            <router-link class="nav-btn" to="/register">Register</router-link>
+            <router-link class="button-sm nav-btn" to="/login">Login</router-link>
+            <router-link class="button-sm nav-btn" to="/register">Register</router-link>
           </div>
           <div v-else>
-            <button class="nav-btn" @click="logout()">Logout</button>
+            <button class="button-sm nav-btn" @click="logout()">Logout</button>
           </div>
     </div>
   </nav>
@@ -40,18 +40,7 @@ export default {
   color: #ffffff !important;
 }
 .nav-btn {
-  display: block;
-  background: white;
-  border: none;
-  color: #282c34;
-  padding: 4px 10px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 1.25rem;
-  max-width: 400px;
-  margin: 0 auto;
-  display: inline-block;
-  margin-left: 12px;
+  display: inline-block !important;
+  margin-left: 12px !important;
 }
 </style>
