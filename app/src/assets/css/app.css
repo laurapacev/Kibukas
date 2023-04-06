@@ -1,0 +1,64 @@
+.button-sm {
+    display: block;
+    background: white;
+    border: none;
+    color: #282c34;
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.button {
+    display: block;
+    background: white;
+    border: none;
+    color: #282c34;
+    padding: 8px 18px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.button-bg {
+    display: block;
+    background: white;
+    border: none;
+    color: #282c34;
+    padding: 12px 26px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-container {
+    margin: 0 auto;
+    width: 400px;
+}
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+.form-control {
+    height: 43px;
+    border-radius: 0px;
+    margin-bottom: 20px;
+}
+.form-control1 {
+    height: 60px;
+    border-radius: 0px;
+    margin-bottom: 20px;
+}
+.reg-heading {
+    text-align: center;
+    margin-bottom: 60px;
+}
