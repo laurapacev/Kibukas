@@ -3,6 +3,14 @@
 
     <form class="form-container">
       <h1 class="reg-heading">LOGIN</h1>
+
+      <input type="text" class="form-control" placeholder="Email"  v-model="email">
+      <input type="password" class="form-control" placeholder="Password"  v-model="password">
+      <input type="button" class="sign-in-btn" @click="this.register" value="Login">
+
+      <span class="hr-span">OR LOGIN WITH</span>
+      <hr class="hr-style"/>
+
       <input @click="signInWithGoogle()" type="button" class="sign-in-btn" value="Google Auth Login">
     </form>
   </div>
@@ -71,6 +79,6 @@ export default {
   top: 25px;
 }
 .hr-style {
-  margin-bottom: 40px;
+  margin-bottom: 70px;
 }
 </style>
