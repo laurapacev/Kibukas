@@ -4,9 +4,12 @@
           <a class="navbar-brand" href="#">
             <b>KIBUKAS</b>
           </a>
-          <div>
+          <div v-if="this.$store.getters.isUserLoggedIn == false">
             <router-link class="nav-btn" to="/login">Login</router-link>
-            <button v-show="this.$store.getters.isUserLoggedIn == true" @click="logout()">Logout</button>
+            <router-link class="nav-btn" to="/register">Register</router-link>
+          </div>
+          <div v-else>
+            <button class="nav-btn" @click="logout()">Logout</button>
           </div>
     </div>
   </nav>
@@ -48,5 +51,7 @@ export default {
   font-size: 1.25rem;
   max-width: 400px;
   margin: 0 auto;
+  display: inline-block;
+  margin-left: 12px;
 }
 </style>
