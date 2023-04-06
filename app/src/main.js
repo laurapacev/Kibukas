@@ -3,6 +3,9 @@ import App from './App.vue'
 import Loading from './views/Loading.vue'
 import { store } from './store'
 
+// CSS
+require('./assets/css/app.css')
+
 // Routes
 import router from './routes'
 
