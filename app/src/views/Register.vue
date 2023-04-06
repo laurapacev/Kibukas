@@ -32,23 +32,13 @@ export default {
       email: null,
       password: null,
       re_password: null,
-      alert: null,
-
-      success: false
     }
   },
   methods: {
-    isAlertSet()
-    {
-      if(this.alert == null)
-        return false
-      return true
-    },
     register()
     {
       if(!this.checkInput())
       {
-        this.success = false
         return
       }
 
@@ -59,11 +49,9 @@ export default {
       }
 
       this.showAlert(true, 'Registration data was successfully supplied', 'success')
-    }
-    ,
+    },
     checkInput()
     {
-      this.success = false
       if(this.name == null || this.name == "")
       {
         this.showAlert(true, 'Empty name field', 'warning')
