@@ -37,7 +37,7 @@ let routes = [
         }
     },
     {
-        path: '/notfound',
+        path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: NotFound,
         meta: {
