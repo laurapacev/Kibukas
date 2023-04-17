@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 import Home from './views/Home.vue';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
+import NotFound from './views/NotFound.vue';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,14 @@ let routes = [
         component: Home,
         meta: {
             requiresAuth: true
+        }
+    },
+    {
+        path: '/notfound',
+        name: 'NotFound',
+        component: NotFound,
+        meta: {
+            requiresAuth: false
         }
     }
 ];
