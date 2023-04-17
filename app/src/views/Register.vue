@@ -16,12 +16,14 @@
 </template>
 
 <script>
+import router from "@/routes";
 // Componets
 import Alert from '../components/Alert.vue'
 
 // Mixins
 import { AlertMixin } from '../mixins/AlertMixin'
 import { Firebase } from '../mixins/Firebase'
+import { createUserWithEmailAndPassword  } from "firebase/auth";
 
 export default {
   components: { Alert },
@@ -48,6 +50,8 @@ export default {
         return
       }
 
+      if(!this.createAccount(this.email, this.password)) return false
+
       this.showAlert(true, 'Registration data was successfully supplied', 'success')
     },
     checkInput()
@@ -57,7 +61,6 @@ export default {
         this.showAlert(true, 'Empty name field', 'warning')
         return false
       }
-
 
       if(this.email == null || this.email == "")
       {
@@ -85,6 +88,21 @@ export default {
       if(this.password == this.re_password)
         return true
       return false
+    },
+    createAccount(email, password)
+    {
+      createUserWithEmailAndPassword(this.getAuth(), email, password)
+      .then((userCredential) => {
+        router.push({ path: '/', name: 'Home' })
+        return true
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        this.showAlert(true, errorMessage, 'error')
+        // ..
+        return false
+      });
     }
   }
 }
