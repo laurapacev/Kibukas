@@ -1,11 +1,11 @@
 <template>
-  <div>
 
+  <div class="dm-container">
     <div class="dm-message dm-recieved mb-2">
       <slot></slot>
     </div>
-    
   </div>
+
 </template>
 
 <script>
@@ -25,5 +25,6 @@ export default {
 .dm-recieved {
   background-color: #dededf !important;
   color: black;
+  float: left;
 }
 </style>
