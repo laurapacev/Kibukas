@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="dm-message dm-my mb-2">
+    <div class="dm-message dm-sent mb-2">
       <slot></slot>
     </div>
     
@@ -23,7 +23,7 @@ export default {
 
 <style>
 
-.dm-my {
+.dm-sent {
   background-color: RGBA(13,110,253,1) !important;
   float: right;
 }
