@@ -1,24 +1,30 @@
 <template>
   <div class="chat-box chat-scrollbar overflow-auto">
 
-    <div class="row">
-      <div class="col-md-4"><RecievedMessage>a</RecievedMessage></div>
-      <div class="col-md-4 offset-md-4"></div>
-    </div>
+    <SentMessage>
+      Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
+    </SentMessage>
 
-    <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4 offset-md-4 col-auto">
-        <SentMessage>ajhgjhgjhgjghjghjghjghjg gjghjhgjghj hgjghjghj
-          kjhkjhkh
-          kjkjl
+    <RecievedMessage>
+      Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
+    </RecievedMessage>
 
-          jklkjljkljkljklkj
-        </SentMessage>
-      </div>
-    </div>
+    <SentMessage>
+      Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
+    </SentMessage>
 
+    <RecievedMessage>
+      Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
+    </RecievedMessage>
 
+    <SentMessage>
+      Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
+    </SentMessage>
+
+    <RecievedMessage>
+      Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
+    </RecievedMessage>
+    
   </div>
 </template>
 
@@ -40,10 +46,20 @@ export default {
 </script>
 
 <style>
+.chat-box {
+  height: calc(100vh - 60px);
+  padding: 20px;
+}
+
+.dm-container {
+  width: 100%;
+  overflow: hidden;
+}
+
 .dm-message {
   border-radius: 6px;
-  padding: 6px;
+  padding: 10px 10px 10px 16px;
   font-size: 15px;
-  display: inline-block;
+  max-width: 85%;
 }
 </style>
