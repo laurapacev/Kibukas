@@ -1,11 +1,11 @@
 <template>
-  <div>
 
+<div class="dm-container">
     <div class="dm-message dm-sent mb-2">
       <slot></slot>
     </div>
-    
   </div>
+
 </template>
 
 <script>
