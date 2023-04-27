@@ -62,3 +62,10 @@
     text-align: center;
     margin-bottom: 60px;
 }
+
+/* Chats */
+
+.chat-scrollbar {
+    scrollbar-color: #6e6691 #0000;
+    scrollbar-width: thin;
+}

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="chat-box chat-scrollbar overflow-auto">
 
     <div class="row">
       <div class="col-md-4"><RecievedMessage>a</RecievedMessage></div>

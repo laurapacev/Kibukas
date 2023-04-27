@@ -1,5 +1,5 @@
 <template>
-    <ul class="list-group recent-chats-container overflow-auto">
+    <ul class="list-group chat-scrollbar recent-chats-container overflow-auto">
       
       <div v-for="recent in array">
         <RecentChatsItem :name="recent">{{ recent }}</RecentChatsItem>
@@ -28,7 +28,5 @@ export default {
 <style>
 .recent-chats-container {
   height: calc(100vh - 150px);
-  scrollbar-color: #6e6691 #0000;
-  scrollbar-width: thin;
 }
 </style>
