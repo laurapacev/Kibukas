@@ -11,22 +11,6 @@
         Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
       </RecievedMessage>
 
-      <SentMessage>
-        Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
-      </SentMessage>
-
-      <RecievedMessage>
-        Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
-      </RecievedMessage>
-
-      <SentMessage>
-        Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
-      </SentMessage>
-
-      <RecievedMessage>
-        Suspendisse at velit quis tellus pellentesque imperdiet in sit amet purus. Aenean auctor quam sit amet mi dictum, in eleifend magna consectetur. Praesent iaculis placerat mauris, nec vestibulum augue placerat at. Fusce in pretium tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi varius felis non arcu congue, sollicitudin consequat neque interdum. Vestibulum mollis ultrices nulla, vitae mollis sem gravida vel. 
-      </RecievedMessage>
-
     </div>
 
     <ChatInput></ChatInput>
@@ -39,8 +23,12 @@ import SentMessage from './SentMessage.vue'
 import RecievedMessage from './RecievedMessage'
 import ChatInput from './ChatInput.vue'
 
+import { Firebase } from '../../mixins/Firebase'
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+
 export default {
   components: { SentMessage, RecievedMessage, ChatInput },
+  mixins: [ Firebase ],
   data() {
     return {
       
@@ -48,6 +36,18 @@ export default {
   },
   methods: {
     
+  },
+  async created()
+  {
+    const messagesRef = collection(this.getFirestore(), 'messages');
+    const q = query(messagesRef, orderBy('uid'), limit(25))
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
+
   }
 }
 </script>
