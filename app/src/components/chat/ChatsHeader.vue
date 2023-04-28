@@ -4,7 +4,8 @@
       <h4>Chats</h4>
     </div>
     <div class="col-4 text-end">
-      <a class="new-message-link" href=""><i class="fa-solid fa-pen-to-square new-message-icon"></i></a>
+      <a class="chats-header-link" href="#"><i class="fa-solid fa-user-plus chats-header-icon"></i></a>
+      <a class="chats-header-link" href="#"><i class="fa-solid fa-pen-to-square chats-header-icon"></i></a>
     </div>
   </div>
 </template>
@@ -31,15 +32,15 @@ export default {
   font-weight: bold;
 }
 
-.new-message-link {
+.chats-header-link {
   text-decoration: none;
   color: #fff;
 }
 
-.new-message-icon {
+.chats-header-icon {
   text-decoration: none;
   color: #fff;
-  font-weight: normal;
   font-size: 20px;
+  margin-left: 10px;
 }
 </style>
