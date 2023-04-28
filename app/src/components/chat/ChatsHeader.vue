@@ -4,21 +4,34 @@
       <h4>Chats</h4>
     </div>
     <div class="col-4 text-end">
-      <a class="chats-header-link" href="#"><i class="fa-solid fa-user-plus chats-header-icon"></i></a>
+      <a class="chats-header-link" href="#" @click="openModal()"><i class="fa-solid fa-user-plus chats-header-icon"></i></a>
       <a class="chats-header-link" href="#"><i class="fa-solid fa-pen-to-square chats-header-icon"></i></a>
     </div>
+
+    <AddFriendModal v-show="showAddFriend" @close="closeModal()"></AddFriendModal>
+
   </div>
 </template>
 
 <script>
+import AddFriendModal from '../modal/AddFriendModal.vue';
+
 export default {
+  components: { AddFriendModal },
   data() {
     return {
-      
+      showAddFriend: false
     }
   },
   methods: {
-    
+    openModal()
+    {
+      this.showAddFriend = true
+    },
+    closeModal()
+    {
+      this.showAddFriend = false
+    }
   }
 }
 </script>
