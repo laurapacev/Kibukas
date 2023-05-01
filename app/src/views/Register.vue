@@ -1,15 +1,17 @@
 <template>
   <div class="container-login">
-
     <form class="form-container">
       <h1 class="reg-heading">REGISTRATION</h1>
-
       <alert v-if="getAlertShow() == true" :type="getAlertType()">{{ getAlertMsg() }}</alert>
-
       <input type="text" class="form-control" placeholder="Name" v-model="name">
       <input type="text" class="form-control" placeholder="Email"  v-model="email">
-      <input type="password" class="form-control" placeholder="Password"  v-model="password">
-      <input type="password" class="form-control" placeholder="Repeat password"  v-model="re_password">
+      <div class="password-container">
+        <input type="password" class="form-control" :type="passwordFieldType" placeholder="Password"  v-model="password">
+        <input type="password" class="form-control" :type="passwordFieldType" placeholder="Repeat password"  v-model="re_password">
+        <label>
+          <input type="checkbox" v-model="showPassword" @change="togglePasswordVisibility"> Show password
+        </label>
+      </div>
       <input type="button" class="button" @click="this.register" value="Register">
     </form>
   </div>
@@ -34,7 +36,18 @@ export default {
       email: null,
       password: null,
       re_password: null,
+      showPassword: false,
     }
+  },
+  computed: {
+    passwordFieldType() {
+      return this.showPassword ? 'text' : 'password';
+    },
+  },
+  methods: {
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+    },
   },
   methods: {
     register()
@@ -104,6 +117,7 @@ export default {
         return false
       });
     }
+    
   }
 }
 </script>
