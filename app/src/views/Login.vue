@@ -1,13 +1,15 @@
 <template>
   <div class="container-login">
-
     <form class="form-container">
       <h1 class="reg-heading">LOGIN</h1>
 
       <alert v-if="getAlertShow() == true" :type="getAlertType()">{{ getAlertMsg() }}</alert>
 
-      <input type="text" class="form-control" placeholder="Email"  v-model="email">
-      <input type="password" class="form-control" placeholder="Password"  v-model="password">
+      <input type="text" class="form-control" placeholder="Email" v-model="email">
+      <div class="password-wrapper">
+        <input type="password" class="form-control" placeholder="Password" v-model="password" :type="showPassword ? 'text' : 'password'">
+        <input type="checkbox" class="show-password-checkbox" v-model="showPassword"> Show Password
+      </div>
       <input type="button" class="button" @click="login()" value="Login">
 
       <span class="hr-span">OR LOGIN WITH</span>
@@ -21,7 +23,10 @@
 <script>
 import router from "@/routes";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+<<<<<<< HEAD
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+=======
+>>>>>>> 92e1b338743c778c6b551b90281560996fabe5ac
 import { getDatabase, set, ref, update } from "firebase/database";
 
 //Initialize firebase
@@ -34,6 +39,7 @@ import Alert from '../components/Alert.vue'
 import { AlertMixin } from '../mixins/AlertMixin'
 import { Firebase } from '../mixins/Firebase'
 
+
 export default {
   components: { Alert },
   mixins: [ AlertMixin, Firebase ],
@@ -41,6 +47,7 @@ export default {
     return {
       email: null,
       password: null,
+      showPassword: false // add a new data property for show password
     }
   },
   methods: {
@@ -76,7 +83,6 @@ export default {
       }
       signInWithEmailAndPassword(auth, email, password) .then((userCredential) => {
       const user = userCredential.user;
-
       const dt = new Date();
       update(ref(database, 'users/' + user.uid),{
         last_login:dt,
@@ -87,7 +93,6 @@ export default {
       const errorCode = error.code;
       const errorMessage = error.message;
     });
-
       this.showAlert(true, 'Login data was successfully supplied', 'success')
     },
     checkInput()
