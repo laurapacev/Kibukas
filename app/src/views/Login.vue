@@ -23,15 +23,6 @@
 <script>
 import router from "@/routes";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-<<<<<<< HEAD
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-=======
->>>>>>> 92e1b338743c778c6b551b90281560996fabe5ac
-import { getDatabase, set, ref, update } from "firebase/database";
-
-//Initialize firebase
-const auth = getAuth();
-const database = getDatabase();
 // Componets
 import Alert from '../components/Alert.vue'
 
@@ -81,18 +72,7 @@ export default {
       {
         return
       }
-      signInWithEmailAndPassword(auth, email, password) .then((userCredential) => {
-      const user = userCredential.user;
-      const dt = new Date();
-      update(ref(database, 'users/' + user.uid),{
-        last_login:dt,
-        email:email
-      })
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
+
       this.showAlert(true, 'Login data was successfully supplied', 'success')
     },
     checkInput()

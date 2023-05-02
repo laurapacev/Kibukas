@@ -54,7 +54,7 @@ export default {
 }
 
 .recent-read {
-  color: #969696;
+  color: #bcbcbc;
   border-left: rgba(255, 255, 255, 0) solid 5px;
 }
 .recent-unread {
