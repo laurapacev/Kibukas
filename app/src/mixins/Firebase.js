@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc, addDoc } from "firebase/firestore"; 
+import { getFirestore, collection, query, where, getDoc, getDocs, doc, setDoc, addDoc } from "firebase/firestore"; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyAD1WEV3K283NKoCXsRxaBk--KV9piKpCc",
@@ -39,14 +39,42 @@ export const Firebase = {
         {
             return provider
         },
+        getDb()
+        {
+            return getFirestore(firebaseApp)
+        },
 
         // Firestore
-        async setDocument(doc_name, data_obj, doc_id = null)
+        async setDocument(collection_name, data_obj, doc_id = null)
         {
             if(doc_id !== null) 
-                await setDoc(doc(getFirestore(firebaseApp), doc_name, doc_id), data_obj);  
+                await setDoc(doc(this.getDb(), collection_name, doc_id), data_obj);  
             else 
-                await addDoc(collection(getFirestore(firebaseApp), doc_name), data_obj);  
+                await addDoc(collection(this.getDb(), doc_name), data_obj);  
+        },
+        async getDocumentById(collection_name, doc_id)
+        {
+            const docRef = doc(this.getDb(), collection_name, doc_id);
+            const docSnap = await getDoc(docRef);
+            
+            if (docSnap.exists())
+              return docSnap.data();
+            return false
+        },
+        async getDocumentsWhere(collection_name, param1, comparison, param2)
+        {
+            // query(collection(db, "cities"), where("capital", "==", true))
+            const q = query(collection(this.getDb(), collection_name), where(param1, comparison, param2));
+            const querySnapshot = await getDocs(q);
+            
+            let array = []
+            querySnapshot.forEach((doc) => {
+                let obj = doc.data()
+                obj.id = doc.id
+               array.push(obj)
+            })
+
+            return array
         }
     }
 }
