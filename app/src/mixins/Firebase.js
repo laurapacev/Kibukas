@@ -50,7 +50,7 @@ export const Firebase = {
             if(doc_id !== null) 
                 await setDoc(doc(this.getDb(), collection_name, doc_id), data_obj);  
             else 
-                await addDoc(collection(this.getDb(), doc_name), data_obj);  
+                await addDoc(collection(this.getDb(), collection_name), data_obj);  
         },
         async getDocumentById(collection_name, doc_id)
         {
