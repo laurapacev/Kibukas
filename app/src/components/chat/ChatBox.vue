@@ -29,7 +29,7 @@
 
     </div>
 
-    <ChatInput></ChatInput>
+    <ChatInput @message="addMessage"></ChatInput>
 
   </div>
 </template>
@@ -47,7 +47,10 @@ export default {
     }
   },
   methods: {
-    
+    addMessage(text)
+    {
+      console.log(text)
+    }
   }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
 
   <div class="chat-box-input-container">
-    <input type="text" class="form-control chat-box-input" aria-describedby="emailHelp" placeholder="Type text here...">
-    <i class="fa-solid fa-paper-plane dm-send-icon"></i>
+    <input type="text" class="form-control chat-box-input" v-model="text" placeholder="Type text here...">
+    <i class="fa-solid fa-paper-plane dm-send-icon" @click="sendMessage()"></i>
   </div>
 
 </template>
@@ -11,11 +11,15 @@
 export default {
   data() {
     return {
-      
+      text: null
     }
   },
   methods: {
-    
+    sendMessage()
+    {
+      this.$emit('message', this.text)
+      this.text = null
+    }
   }
 }
 </script>
