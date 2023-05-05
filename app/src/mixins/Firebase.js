@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore, collection, doc, setDoc, addDoc } from "firebase/firestore"; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyAD1WEV3K283NKoCXsRxaBk--KV9piKpCc",
@@ -25,6 +26,7 @@ export const Firebase = {
         }
     },
     methods: {
+        // General firebase
         getFirebase()
         {
             return firebaseApp;
@@ -36,6 +38,15 @@ export const Firebase = {
         getProvider()
         {
             return provider
+        },
+
+        // Firestore
+        async setDocument(doc_name, data_obj, doc_id = null)
+        {
+            if(doc_id !== null) 
+                await setDoc(doc(getFirestore(firebaseApp), doc_name, doc_id), data_obj);  
+            else 
+                await addDoc(collection(getFirestore(firebaseApp), doc_name), data_obj);  
         }
     }
 }
