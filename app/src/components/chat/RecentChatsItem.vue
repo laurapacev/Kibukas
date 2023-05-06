@@ -1,5 +1,5 @@
 <template>
-  <a href="#" class="list-group-item recent-chat recent-read" aria-current="true">
+  <router-link :to="generateChatUrl()" class="list-group-item recent-chat recent-read" aria-current="true">
     <div class="row">
 
       <div class="col-md-auto">
@@ -18,25 +18,31 @@
       </div>
 
     </div>
-  </a>
+  </router-link>
 
 </template>
 
 <script>
+import router from '@/routes';
+
 export default {
-  props: {
-    name: { required: true }
-  },
-  data() {
-    return {
-      
-    }
-  },
-  methods: {
-    getTimeAgo() {
-      return '3 days'
-    }
-  }
+    components: { router },
+    props: {
+      name: { required: true },
+      uid: { required: true }
+    },
+    data() {
+      return {};
+    },
+    methods: {
+      generateChatUrl() {
+        return `/?uid=${this.uid}`
+      },
+      getTimeAgo() {
+          return "3 days";
+      }
+    },
+    
 }
 </script>
 

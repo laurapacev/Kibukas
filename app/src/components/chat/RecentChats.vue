@@ -1,8 +1,8 @@
 <template>
     <ul class="list-group chat-scrollbar recent-chats-container overflow-auto">
       
-      <div v-for="recent in array">
-        <RecentChatsItem :name="recent">{{ recent }}</RecentChatsItem>
+      <div v-for="recent in chats">
+        <RecentChatsItem :name="recent.name" :uid="recent.uid">text</RecentChatsItem>
       </div>
 
     </ul>
@@ -11,16 +11,34 @@
 <script>
 // Componets
 import RecentChatsItem from './RecentChatsItem'
+import { Firebase } from '../../mixins/Firebase'
 
 export default {
   components: { RecentChatsItem },
+  mixins: [ Firebase ],
   data() {
     return {
-      array: ['Vartotojas', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b']
+      chats: []
     }
   },
   methods: {
-    
+    async getUserFriends() {
+      return await this.getDocuments("users")
+    }
+  },
+  async created() {
+    let users = await this.getUserFriends()
+
+    users.forEach(element => {
+      const user_obj = { 
+        uid: element.uid,
+        name: element.email
+      }
+
+      this.chats.push(user_obj)
+    });
+
+    console.log(this.chats)
   }
 }
 </script>
