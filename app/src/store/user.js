@@ -14,7 +14,11 @@ export default {
         getApiState(state)
         {
             return state.apiState
-        }
+        },
+        getUser(state)
+        {
+           return state.user
+        },
     },
     mutations: {
         setApiState(state, sts)
