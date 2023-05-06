@@ -22,7 +22,7 @@
 
 <script>
 import router from "@/routes";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword  } from "firebase/auth";
 // Componets
 import Alert from '../components/Alert.vue'
 
@@ -71,6 +71,21 @@ export default {
         // ...
       });
     },
+    signInWithEmail()
+    {
+      signInWithEmailAndPassword(this.getAuth(), this.email, this.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user
+
+        router.push({ path: '/', name: 'Home' })
+      }).catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        
+        this.showAlert(true, errorMessage, 'error')
+      });
+    },
     login()
     {
       if(!this.checkInput())
@@ -78,7 +93,8 @@ export default {
         return
       }
 
-      this.showAlert(true, 'Login data was successfully supplied', 'success')
+      this.signInWithEmail()
+      //this.showAlert(true, 'Login data was successfully supplied', 'success')
     },
     checkInput()
     {
