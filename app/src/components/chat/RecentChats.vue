@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     async getUserFriends() {
-      return await this.getDocuments("users")
+      return await this.getDocumentsWhere("users", "uid", "!=", this.$store.getters.getUser.uid)
     }
   },
   async created() {
