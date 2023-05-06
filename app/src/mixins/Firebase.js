@@ -75,6 +75,21 @@ export const Firebase = {
             })
 
             return array
+        },
+        async getDocuments(collection_name)
+        {
+            // query(collection(db, "cities"), where("capital", "==", true))
+            const q = query(collection(this.getDb(), collection_name));
+            const querySnapshot = await getDocs(q);
+            
+            let array = []
+            querySnapshot.forEach((doc) => {
+                let obj = doc.data()
+                obj.id = doc.id
+               array.push(obj)
+            })
+
+            return array
         }
     }
 }
