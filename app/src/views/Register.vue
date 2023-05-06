@@ -9,7 +9,7 @@
         <input type="password" class="form-control" :type="passwordFieldType" placeholder="Password"  v-model="password">
         <input type="password" class="form-control" :type="passwordFieldType" placeholder="Repeat password"  v-model="re_password">
         <label>
-          <input type="checkbox" v-model="showPassword" @change="togglePasswordVisibility"> Show password
+          <input type="checkbox" v-model="showPassword" @change="togglePasswordVisibility()"> Show password
         </label>
       </div>
       <input type="button" class="button" @click="this.register" value="Register">
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import router from "@/routes";
 // Componets
 import Alert from '../components/Alert.vue'
 
@@ -65,7 +64,7 @@ export default {
 
       if(!this.createAccount(this.email, this.password)) return false
 
-      this.showAlert(true, 'Registration data was successfully supplied', 'success')
+      this.showAlert(true, 'Registration was successful', 'success')
     },
     checkInput()
     {
@@ -105,7 +104,9 @@ export default {
     createAccount(email, password)
     {
       createUserWithEmailAndPassword(this.getAuth(), email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
+        console.log(userCredential)
+        this.addUserToFirebaseCollection(userCredential.user.uid, userCredential.user.email)
         router.push({ path: '/', name: 'Home' })
         return true
       })
@@ -116,8 +117,14 @@ export default {
         // ..
         return false
       });
+    },
+    addUserToFirebaseCollection(u_id, e_mail)
+    {
+      this.setDocument("users", {
+        uid: u_id,
+        email: e_mail
+      }, u_id) 
     }
-    
   }
 }
 </script>
