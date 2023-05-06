@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="recipientUid">
 
     <div class="chat-box chat-scrollbar overflow-auto">
 
@@ -32,6 +32,9 @@
     <ChatInput @message="addMessage"></ChatInput>
 
   </div>
+  <div v-else class="no-chat-container">
+    <h5 class="no-chat-notice">Select or create new chat</h5>
+  </div>
 </template>
 
 <script>
@@ -39,17 +42,28 @@ import SentMessage from './SentMessage.vue'
 import RecievedMessage from './RecievedMessage'
 import ChatInput from './ChatInput.vue'
 
+import { Firebase } from '../../mixins/Firebase'
+
 export default {
   components: { SentMessage, RecievedMessage, ChatInput },
-  data() {
-    return {
-      
-    }
+  mixins: [ Firebase ],
+  props: {
+    recipientUid: { default: null }
   },
   methods: {
-    addMessage(text)
+    async addMessage(text)
     {
-      console.log(text)
+      if(!text) return
+
+      this.setDocument('messages', {
+        from: this.$store.getters.getUser.uid,
+        to: this.recipientUid,
+        message: text
+      })
+    },
+    changeReciepient(uid)
+    {
+      this.recipientUid = uid
     }
   }
 }
@@ -71,5 +85,17 @@ export default {
   padding: 10px 10px 10px 16px;
   font-size: 15px;
   max-width: 85%;
+}
+
+.no-chat-container {
+  position: relative;
+  height: 100%;
+}
+
+.no-chat-notice {
+  text-align: center;
+  top: 50%;
+  position: absolute;
+  left: 50%;
 }
 </style>

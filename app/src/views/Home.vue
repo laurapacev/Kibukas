@@ -4,10 +4,10 @@
     <div class="row">
       <div class="col-4 chat-list-column ">
         <ChatsHeader></ChatsHeader>
-        <RecentChats></RecentChats>
+        <RecentChats @recipientUid="changeRecipient"></RecentChats>
       </div>
       <div class="col chat-column">
-        <ChatBox></ChatBox>
+        <ChatBox :recipientUid="recipientUid"></ChatBox>
       </div>
     </div>
   </div>
@@ -24,11 +24,14 @@ export default {
   components: { RecentChats, ChatsHeader, ChatBox },
   data () {
     return {
-
+      recipientUid: null
     }
   },
   methods: {
-
+    changeRecipient(uid)
+    {
+      this.recipientUid = uid
+    }
   }
 }
 </script>
