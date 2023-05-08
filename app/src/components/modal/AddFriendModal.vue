@@ -1,64 +1,93 @@
 <template>
 
-  <div class="modal fade show modal-overlay" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false" style="color: black; display: inline">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add friend</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="$emit('close')"></button>
-        </div>
-        <div class="modal-body">
-          <input type="text" v-model="friendEmail" class="form-control" aria-describedby="emailHelp" placeholder="Friend email address">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="$emit('close')">Close</button>
-          <button type="button" class="btn btn-primary" @click="addFriend()">Add</button>
+    <div class="modal fade show modal-overlay" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false" style="color: black; display: inline">
+      
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add friend</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="$emit('close')"></button>
+          </div>
+          <div class="modal-body">
+            <alert v-if="getAlertShow() == true" :type="getAlertType()">{{ getAlertMsg() }}</alert>
+            <input type="text" v-model="friendEmail" class="form-control" aria-describedby="emailHelp" placeholder="Friend email address">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="$emit('close')">Close</button>
+            <button type="button" class="btn btn-primary" @click="addFriend()">Add</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  
+  </template>
+  
+  <script>
+  import Alert from '../Alert.vue'
+  // Mixins
+  import { Firebase } from '../../mixins/Firebase'
+  import { AlertMixin } from '../../mixins/AlertMixin'
+  
+  export default {
+    components: { Alert },
+    mixins: [ AlertMixin, Firebase ],
+    data() {
+      return {
+        friendEmail: null
+      }
+    },
+    methods: {
+      async addFriend()
+      {
+        if(!this.friendEmail) {
+          this.showAlert(true, "Field is empty", 'danger')
+          return
+        }
 
-</template>
+        const user_uid = this.$store.getters.getUser.uid
+        const addFriend_uid = await this.getUidByEmail(this.friendEmail)
 
-<script>
-import { auth, getAuth, getUserByEmail } from "firebase/auth";
+        if(!addFriend_uid) {
+          this.showAlert(true, "User not found", 'danger')
+          return
+        }
 
-// Mixins
-import { Firebase } from '../../mixins/Firebase'
+        if(await this.isUserInFriendsList(user_uid, addFriend_uid)) {
+          this.showAlert(true, "User is already in friend list", 'danger')
+          return
+        }
 
-export default {
-  mixins: [ Firebase ],
-  data() {
-    return {
-      friendEmail: null
-    }
-  },
-  methods: {
-    addFriend()
-    {
-      /*
-      getAuth()
-        .getUserByEmail(this.friendEmail)
-        .then((userRecord) => {
-          // See the UserRecord reference doc for the contents of userRecord.
-          console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+        this.setDocument("friendRequests", {
+          from: user_uid,
+          to: addFriend_uid
         })
-        .catch((error) => {
-          console.log('Error fetching user data:', error);
-        });
-        */
-       
-      console.log(getAuth())
+
+        this.showAlert(true, "yra", 'success')
+      },
+      async getUidByEmail(email)
+      {
+        const user = await this.getDocumentsWhere('users', 'email', '==', email)
+        
+        if(user !== false) return user.pop().uid
+        return false
+      },
+      async isUserInFriendsList(user_uid, fiend_uid)
+      {
+        const user = await this.getDocumentsWhere('friends', 'uid', '==', user_uid, 'friendUid', '==', fiend_uid)
+
+        if(user !== false) return user.pop().uid
+        return false
+      }
     }
   }
-}
-</script>
-
-<style>
-.modal-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #0000008c;
-}
-</style>
+  </script>
+  
+  <style>
+  .modal-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #0000008c;
+  }
+  </style>
+  
