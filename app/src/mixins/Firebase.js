@@ -74,6 +74,8 @@ export const Firebase = {
                array.push(obj)
             })
 
+            if(array.length == 0) return false
+
             return array
         },
         async getDocuments(collection_name)
@@ -88,6 +90,8 @@ export const Firebase = {
                 obj.id = doc.id
                array.push(obj)
             })
+
+            if(array.length == 0) return false
 
             return array
         }
