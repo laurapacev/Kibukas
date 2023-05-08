@@ -35,9 +35,6 @@ export default {
 
       return 'alert-primary'
     }
-  },
-  created() {
-    console.log(this.getType())
   }
 }
 </script>
