@@ -78,6 +78,23 @@ export const Firebase = {
 
             return array
         },
+        async getDocumentsTwoWhere(collection_name, param1, comparison, param2, param3, comparison2, param4)
+        {
+            // query(collection(db, "cities"), where("capital", "==", true))
+            const q = query(collection(this.getDb(), collection_name), where(param1, comparison, param2), where(param3, comparison2, param4));
+            const querySnapshot = await getDocs(q);
+            
+            let array = []
+            querySnapshot.forEach((doc) => {
+                let obj = doc.data()
+                obj.id = doc.id
+               array.push(obj)
+            })
+
+            if(array.length == 0) return false
+
+            return array
+        },
         async getDocuments(collection_name)
         {
             // query(collection(db, "cities"), where("capital", "==", true))
