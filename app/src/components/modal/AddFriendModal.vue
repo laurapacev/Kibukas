@@ -57,12 +57,17 @@
           return
         }
 
+        if(await this.isRequestSent(user_uid, addFriend_uid)) {
+          this.showAlert(true, "Friend request is already sent", 'danger')
+          return
+        }
+
         this.setDocument("friendRequests", {
           from: user_uid,
           to: addFriend_uid
         })
 
-        this.showAlert(true, "yra", 'success')
+        this.showAlert(true, "Friend request sent!", 'success')
       },
       async getUidByEmail(email)
       {
@@ -73,9 +78,16 @@
       },
       async isUserInFriendsList(user_uid, fiend_uid)
       {
-        const user = await this.getDocumentsWhere('friends', 'uid', '==', user_uid, 'friendUid', '==', fiend_uid)
+        const user = await this.getDocumentsTwoWhere('friends', 'uid', '==', user_uid, 'friendUid', '==', fiend_uid)
 
         if(user !== false) return user.pop().uid
+        return false
+      },
+      async isRequestSent(user_uid, fiend_uid)
+      {
+        const request = await this.getDocumentsTwoWhere('friendRequests', 'from', '==', user_uid, 'to', '==', fiend_uid)
+        
+        if(request !== false) return true
         return false
       }
     }
