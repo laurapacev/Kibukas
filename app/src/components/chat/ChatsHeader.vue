@@ -4,20 +4,28 @@
       <h4>Chats</h4>
     </div>
     <div class="col-4 text-end">
-      <a class="new-message-link" href=""><i class="fa-solid fa-pen-to-square new-message-icon"></i></a>
+      <a class="chat-header-link" href="" onclick="return false;"><i class="fa-solid fa-pen-to-square new-message-icon"></i></a>
+      <a class="chat-header-link" href="" onclick="return false;" @click="changeModalOpenState()"><i class="fa-solid fa-user-plus new-message-icon"></i></a>
     </div>
+
+    <AddFriendModal v-if="showModal" @close="changeModalOpenState()"></AddFriendModal>
   </div>
 </template>
 
 <script>
+import AddFriendModal from '../modal/AddFriendModal.vue';
+
 export default {
+  components: { AddFriendModal },
   data() {
     return {
-      
+      showModal: false
     }
   },
   methods: {
-    
+    changeModalOpenState() {
+      this.showModal  = !this.showModal
+    }
   }
 }
 </script>
@@ -31,15 +39,16 @@ export default {
   font-weight: bold;
 }
 
-.new-message-link {
+.chat-header-link {
   text-decoration: none;
   color: #fff;
+  margin-left: 15px;
 }
 
 .new-message-icon {
   text-decoration: none;
   color: #fff;
-  font-weight: normal;
+  /* font-weight: normal; */
   font-size: 20px;
 }
 </style>
