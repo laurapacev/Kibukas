@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, collection, query, where, getDoc, getDocs, doc, setDoc, addDoc } from "firebase/firestore"; 
+import { getFirestore, collection, query, where, getDoc, getDocs, doc, setDoc, addDoc, deleteDoc  } from "firebase/firestore"; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyAD1WEV3K283NKoCXsRxaBk--KV9piKpCc",
@@ -111,6 +111,10 @@ export const Firebase = {
             if(array.length == 0) return false
 
             return array
+        },
+        async deleteDocument(collection_name, doc_id)
+        {
+            await deleteDoc(doc(this.getDb(), collection_name, doc_id))
         }
     }
 }
