@@ -16,8 +16,8 @@
 
 <script>
 // Componets
-import ChatsHeader from '../components/chat/ChatsHeader.vue'
-import RecentChats from '../components/chat/RecentChats'
+import ChatsHeader from '../components/chatSidebar/ChatsHeader.vue'
+import RecentChats from '../components/chatSidebar/RecentChats'
 import ChatBox from '../components/chat/ChatBox'
 
 export default {
