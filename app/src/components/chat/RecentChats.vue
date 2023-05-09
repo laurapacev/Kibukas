@@ -2,7 +2,7 @@
     <ul class="list-group chat-scrollbar recent-chats-container overflow-auto">
       
       <div v-for="recent in chats">
-        <RecentChatsItem :name="recent.name" :uid="recent.uid" @recipientUid="(uid) => $emit('recipientUid', uid)">text</RecentChatsItem>
+        <RecentChatsItem :name="recent.email" :uid="recent.uid" @recipientUid="(uid) => $emit('recipientUid', uid)">text</RecentChatsItem>
       </div>
 
     </ul>
@@ -23,12 +23,26 @@ export default {
   },
   methods: {
     async getUserFriends() {
-      return await this.getDocumentsWhere("users", "uid", "!=", this.$store.getters.getUser.uid)
+      const user_uid = this.$store.getters.getUser.uid
+      let array = []
+
+      const friendsUidArray = await this.getDocumentsWhere("friends", "uid", "==", user_uid)
+
+      friendsUidArray.forEach(async (friend) => {
+        const friendData = await this.getDocumentById('users', friend.friendUid)
+        //console.log(friendData)
+        array.push(friendData)
+      })
+
+      if(array.length = 0) return []
+
+      return array
     }
   },
   async created() {
-    let users = await this.getUserFriends()
-
+    this.chats = await this.getUserFriends()
+   
+    /*
     users.forEach(element => {
       const user_obj = { 
         uid: element.uid,
@@ -37,8 +51,7 @@ export default {
 
       this.chats.push(user_obj)
     });
-
-    console.log(this.chats)
+    */
   }
 }
 </script>
