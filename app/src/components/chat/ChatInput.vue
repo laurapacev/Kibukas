@@ -21,9 +21,6 @@ export default {
 
       this.$emit('message', this.text)
       this.text = null
-    },
-    text() {
-
     }
   }
 }
