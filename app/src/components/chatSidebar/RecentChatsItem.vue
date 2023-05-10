@@ -46,6 +46,8 @@ export default {
       const dateNow = new Date()
       const dateMsg = new Date(timestamp)
 
+      if(!timestamp) return ''
+
       const dateDiff = Math.abs(dateNow - dateMsg)
       const diffDays = Math.floor(dateDiff / (1000 * 60 * 60 * 24)); 
       const diffHours = Math.floor(dateDiff / (1000 * 60 * 60)); 
@@ -67,7 +69,7 @@ export default {
   async created()
   {
     this.msg = await this.latestMsg
-    if(this.msg.timestamp && this.msg.timestamp > 0) this.fetched = true
+    this.fetched = true
   }
 }
 </script>
