@@ -1,5 +1,5 @@
 <template>
-  <a href="#" @click="changeRecipient()" class="list-group-item recent-chat recent-read" aria-current="true">
+  <a href="#" @click="changeRecipient()" onclick="return false;" class="list-group-item recent-chat recent-read">
     <div class="row">
 
       <div class="col-md-auto">
