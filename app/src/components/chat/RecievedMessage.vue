@@ -10,6 +10,9 @@
 
 <script>
 export default {
+  props: { 
+    docId: { required: true } 
+  },
   data() {
     return {
       
