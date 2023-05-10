@@ -99,10 +99,12 @@ export default {
         message: text,
         timestamp: new Date().getTime()
       })
+
+      this.messages = await this.getUserMessagesArray()
     },
     subscribeNewMessage(recipient_uid)
     {
-      const q = query(collection(this.getDb(), "messages"), where("from", "==", this.user_uid), where('to', '==', recipient_uid));
+      const q = query(collection(this.getDb(), "messages"), where("to", "==", this.user_uid), where('from', '==', recipient_uid));
       const unsubscribe = onSnapshot(q, async (querySnapshot) => {
         this.messages = await this.getUserMessagesArray()
       });
