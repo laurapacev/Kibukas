@@ -1,7 +1,7 @@
 <template>
 
   <div class="chat-box-input-container">
-    <input type="text" class="form-control chat-box-input" v-model="text" placeholder="Type text here...">
+    <input type="text" class="form-control chat-box-input" v-model="text" placeholder="Type text here..." v-on:keyup.enter="sendMessage()">
     <i class="fa-solid fa-paper-plane dm-send-icon" @click="sendMessage()"></i>
   </div>
 
@@ -17,8 +17,13 @@ export default {
   methods: {
     sendMessage()
     {
+      if(this.text == null) return
+
       this.$emit('message', this.text)
       this.text = null
+    },
+    text() {
+
     }
   }
 }
