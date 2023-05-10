@@ -4,8 +4,8 @@
     <div class="chat-box chat-scrollbar overflow-auto">
 
       <div v-for="message in messages">
-        <SentMessage v-if="message.status == 'sent'" :docId="message.id">{{ message.message }}</SentMessage>
-        <RecievedMessage v-else :docId="message.id">{{ message.message }}</RecievedMessage>
+        <SentMessage v-if="message.status == 'sent'" :docId="message.id" :timestamp="message.timestamp">{{ message.message }}</SentMessage>
+        <RecievedMessage v-else :docId="message.id" :timestamp="message.timestamp">{{ message.message }}</RecievedMessage>
       </div>
 
     </div>

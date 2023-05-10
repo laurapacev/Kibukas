@@ -1,7 +1,7 @@
 <template>
 
   <div class="dm-container">
-    <div class="dm-message dm-recieved mb-2">
+    <div class="dm-message dm-recieved mb-2" data-bs-toggle="tooltip" data-bs-placement="right" :data-bs-title="getMessageDate()">
       <slot></slot>
     </div>
   </div>
@@ -11,7 +11,8 @@
 <script>
 export default {
   props: { 
-    docId: { required: true } 
+    docId: { required: true },
+    timestamp: { required: false } 
   },
   data() {
     return {
@@ -19,7 +20,15 @@ export default {
     }
   },
   methods: {
-    
+    getMessageDate()
+    {
+      return new Date(this.timestamp).toLocaleString('LT-lt') 
+    }
+  },
+  created()
+  {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
   }
 }
 </script>
