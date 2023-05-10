@@ -8,7 +8,7 @@
       </div>    
     </div>
 
-    <MessageDropdown :doc-id="this.docId"></MessageDropdown>
+    <MessageDropdown :doc-id="this.docId" @delete="(val) => $emit('delete', val)"></MessageDropdown>
   </div>
 
 </template>

@@ -1,15 +1,16 @@
 <template>
 
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><a class="dropdown-item" href="#" onclick="return false;" @click="deleteMessage()">Delete</a></li>
   </ul>
 
 </template>
 
 <script>
+import { Firebase } from '@/mixins/Firebase'
+
 export default {
+  mixins: [ Firebase ],
   props: { 
     docId: { required: true }
   },
@@ -19,7 +20,11 @@ export default {
     }
   },
   methods: {
-
+    async deleteMessage()
+    {
+      await this.deleteDocument('messages', this.docId)
+      this.$emit('delete', this.docId)
+    }
   },
   created()
   {

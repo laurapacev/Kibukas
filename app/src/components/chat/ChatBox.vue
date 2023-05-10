@@ -4,7 +4,7 @@
     <div class="chat-box chat-scrollbar overflow-auto">
 
       <div v-for="message in messages">
-        <SentMessage v-if="message.status == 'sent'" :docId="message.id" :timestamp="message.timestamp">{{ message.message }}</SentMessage>
+        <SentMessage v-if="message.status == 'sent'" :docId="message.id" :timestamp="message.timestamp" @delete="updateChat()">{{ message.message }}</SentMessage>
         <RecievedMessage v-else :docId="message.id" :timestamp="message.timestamp">{{ message.message }}</RecievedMessage>
       </div>
 
@@ -48,6 +48,10 @@ export default {
     }
   },
   methods: {
+    async updateChat()
+    {
+      this.messages = await this.getUserMessagesArray()
+    },
     async getUserMessagesArray() {
       const user_uid = this.$store.getters.getUser.uid
       let messages;
