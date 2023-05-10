@@ -2,7 +2,7 @@
     <ul class="list-group chat-scrollbar recent-chats-container overflow-auto">
       
       <div v-for="recent in chats">
-        <RecentChatsItem :userData="recent" :latestMsg="recent" @recipientUid="(uid) => $emit('recipientUid', uid)">text</RecentChatsItem>
+        <RecentChatsItem :userData="recent" :latestMsg="getLatestRecievedMsg(recent.uid)" @recipientUid="(uid) => $emit('recipientUid', uid)"></RecentChatsItem>
       </div>
 
     </ul>
@@ -18,6 +18,7 @@ export default {
   mixins: [ Firebase ],
   data() {
     return {
+      user_uid: this.$store.getters.getUser.uid,
       chats: []
     }
   },
@@ -37,6 +38,17 @@ export default {
       if(array.length = 0) return []
 
       return array
+    },
+    async getLatestRecievedMsg(sender_user_uid)
+    {
+      let messages = await this.getDocumentsTwoWhere('messages', 'to', '==', this.user_uid, 'from', '==', sender_user_uid)
+      if(messages == false) return []
+
+      // Sorting
+      messages.sort((a, b) => a.timestamp - b.timestamp)
+      //console.log(messages.pop())
+
+      return messages.pop()
     }
   },
   async created() {

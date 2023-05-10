@@ -1,5 +1,5 @@
 <template>
-  <a href="#" @click="changeRecipient()" onclick="return false;" class="list-group-item recent-chat recent-read">
+  <a v-if="fetched == true" href="#" @click="changeRecipient()" onclick="return false;" class="list-group-item recent-chat recent-read">
     <div class="row">
 
       <div class="col-md-auto">
@@ -12,13 +12,13 @@
           <h5 class="mb-1">{{ userData.email }}</h5>
 
           <!-- <span class="badge bg-primary rounded-pill">14</span >-->
-          <small>{{ getTimeAgo() }}</small>
+          <small>{{ getTimeAgo(msg.timestamp) }}</small>
 
         </div>
         <div class="d-flex w-100 justify-content-between">
           <p class="mb-1 recent-message">
 
-            <slot></slot>
+            {{ msg.message }}
 
           </p>
         </div>
@@ -37,17 +37,37 @@ export default {
   },
   data() {
     return {
-      
+      fetched: false,
+      msg: []
     }
   },
   methods: {
-    getTimeAgo() {
-      return '3 days'
+    getTimeAgo(timestamp) {
+      const dateNow = new Date()
+      const dateMsg = new Date(timestamp)
+
+      const dateDiff = Math.abs(dateNow - dateMsg)
+      const diffDays = Math.floor(dateDiff / (1000 * 60 * 60 * 24)); 
+      const diffHours = Math.floor(dateDiff / (1000 * 60 * 60)); 
+      const diffMins = Math.floor(dateDiff / (1000 * 60));
+      const diffSeconds = Math.floor(dateDiff / (1000));
+
+      if(diffDays != 0) return `${diffDays} days`
+      if(diffHours != 0) return `${diffHours} h`
+      if(diffMins != 0) return `${diffMins} min`
+      if(diffSeconds != 0) return `${diffSeconds} s`
+
+      return ''
     },
     changeRecipient()
     {
       this.$emit('recipientUid', this.userData.uid)
     }
+  },
+  async created()
+  {
+    this.msg = await this.latestMsg
+    if(this.msg.timestamp && this.msg.timestamp > 0) this.fetched = true
   }
 }
 </script>
