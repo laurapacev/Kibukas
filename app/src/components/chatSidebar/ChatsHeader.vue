@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-between chats-header">
     <div class="col-4">
-      <h4>Chats</h4>
+      <h4>Recents</h4>
     </div>
     <div class="col-4 text-end">
       <!-- <a class="chat-header-link" href="" onclick="return false;"><i class="fa-solid fa-pen-to-square new-message-icon"></i></a> -->
