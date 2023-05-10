@@ -2,7 +2,7 @@
     <ul class="list-group chat-scrollbar recent-chats-container overflow-auto">
       
       <div v-for="recent in chats">
-        <RecentChatsItem :name="recent.email" :uid="recent.uid" @recipientUid="(uid) => $emit('recipientUid', uid)">text</RecentChatsItem>
+        <RecentChatsItem :userData="recent" :latestMsg="recent" @recipientUid="(uid) => $emit('recipientUid', uid)">text</RecentChatsItem>
       </div>
 
     </ul>

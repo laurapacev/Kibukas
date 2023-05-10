@@ -8,12 +8,19 @@
 
       <div class="col">
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">{{ name }}</h5>
+
+          <h5 class="mb-1">{{ userData.email }}</h5>
+
           <!-- <span class="badge bg-primary rounded-pill">14</span >-->
           <small>{{ getTimeAgo() }}</small>
+
         </div>
         <div class="d-flex w-100 justify-content-between">
-          <p class="mb-1 recent-message"><slot></slot></p>
+          <p class="mb-1 recent-message">
+
+            <slot></slot>
+
+          </p>
         </div>
       </div>
 
@@ -25,8 +32,8 @@
 <script>
 export default {
   props: {
-    name: { required: true },
-    uid: { required: true }
+    userData: { required: true },
+    latestMsg: { required: true }
   },
   data() {
     return {
@@ -39,7 +46,7 @@ export default {
     },
     changeRecipient()
     {
-      this.$emit('recipientUid', this.uid)
+      this.$emit('recipientUid', this.userData.uid)
     }
   }
 }
