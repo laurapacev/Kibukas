@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, collection, query, where, getDoc, getDocs, doc, setDoc, addDoc, deleteDoc, limit  } from "firebase/firestore"; 
+import { getFirestore, collection, query, where, getDoc, getDocs, doc, setDoc, addDoc, deleteDoc, limit, orderBy } from "firebase/firestore"; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyAD1WEV3K283NKoCXsRxaBk--KV9piKpCc",
@@ -61,12 +61,12 @@ export const Firebase = {
               return docSnap.data();
             return false
         },
-        async getDocumentsWhere(collection_name, param1, comparison, param2, limit = null)
+        async getDocumentsWhere(collection_name, param1, comparison, param2, lim = null)
         {
             // query(collection(db, "cities"), where("capital", "==", true))
             let q
-            if(limit)
-                q = query(collection(this.getDb(), collection_name), where(param1, comparison, param2), limit(limit))
+            if(lim)
+                q = query(collection(this.getDb(), collection_name), where(param1, comparison, param2), limit(lim))
             else
                 q = query(collection(this.getDb(), collection_name), where(param1, comparison, param2))
 
@@ -83,12 +83,13 @@ export const Firebase = {
 
             return array
         },
-        async getDocumentsTwoWhere(collection_name, param1, comparison, param2, param3, comparison2, param4, limit = null)
+        async getDocumentsTwoWhere(collection_name, param1, comparison, param2, param3, comparison2, param4, lim = null)
         {
             // query(collection(db, "cities"), where("capital", "==", true))
             let q
-            if(limit)
-                q = query(collection(this.getDb(), collection_name), where(param1, comparison, param2), where(param3, comparison2, param4), limit(limit))
+            if(lim)
+                q = query(collection(this.getDb(), collection_name), where(param1, comparison, param2), where(param3, comparison2, param4), 
+                    limit(lim))
             else
                 q = query(collection(this.getDb(), collection_name), where(param1, comparison, param2), where(param3, comparison2, param4))
 
