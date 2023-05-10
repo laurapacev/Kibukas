@@ -124,7 +124,7 @@ export default {
 
 .dm-message {
   border-radius: 6px;
-  padding: 10px 10px 10px 16px;
+  padding: 10px 16px;
   font-size: 15px;
   max-width: 85%;
 }

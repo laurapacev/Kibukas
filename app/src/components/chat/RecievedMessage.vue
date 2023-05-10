@@ -23,7 +23,7 @@ export default {
 
 <style>
 .dm-recieved {
-  background-color: #dededf !important;
+  background-color: #e9e9ea !important;
   color: black;
   float: left;
 }
