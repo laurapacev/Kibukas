@@ -15,11 +15,12 @@
 
 <script>
 import AddFriendModal from '../modal/AddFriendModal.vue';
+import RemoveFriendModal from '../modal/RemoveFriendModal.vue';
 import FriendRequestDropdown from './FriendRequestDropdown.vue';
 import { Firebase } from '@/mixins/Firebase';
 
 export default {
-  components: { AddFriendModal, FriendRequestDropdown },
+  components: { AddFriendModal, FriendRequestDropdown, RemoveFriendModal },
   mixins: [ Firebase ],
   data() {
     return {
