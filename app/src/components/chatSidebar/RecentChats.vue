@@ -1,14 +1,16 @@
 <template>
     <ul class="list-group chat-scrollbar recent-chats-container overflow-auto">
       
-      <div v-for="recent in chats">
-        <RecentChatsItem :userData="recent" :latestMsg="getLatestRecievedMsg(recent.uid)" @recipientUid="(uid) => $emit('recipientUid', uid)"></RecentChatsItem>
+      <div v-for="(recent, key) in chats">
+        <RecentChatsItem :userData="recent" :latestMsg="getLatestRecievedMsg(recent.uid)" @recipientUid="(uid) => $emit('recipientUid', uid)" @removeFriend="(friend_uid) => removeFriend(friend_uid, key)"></RecentChatsItem>
       </div>
 
     </ul>
 </template>
 
 <script>
+import router from '@/routes'
+
 // Componets
 import RecentChatsItem from './RecentChatsItem'
 import { Firebase } from '../../mixins/Firebase'
@@ -23,6 +25,16 @@ export default {
     }
   },
   methods: {
+    async removeFriend(friend_uid, arrayKey) {
+      const friendEntry1 = await this.getDocumentsWhere('friends', 'friendUid', '==', friend_uid)
+      const friendEntry2 = await this.getDocumentsWhere('friends', 'friendUid', '==', this.user_uid)
+
+      await this.deleteDocument('friends', friendEntry1[0].id)
+      await this.deleteDocument('friends', friendEntry2[0].id)
+
+      this.chats.splice(arrayKey, 1)
+      location.reload(false)
+    },
     async getUserFriends() {
       const user_uid = this.$store.getters.getUser.uid
       let array = []
