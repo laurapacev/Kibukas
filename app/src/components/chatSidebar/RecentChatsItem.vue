@@ -23,6 +23,12 @@
           </p>
         </div>
       </div>
+      <div class="col-md-auto">
+        <i class="fa-solid fa-ellipsis-vertical recent-chat-menu-icon" data-bs-toggle="dropdown"></i>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#" onclick="return false;" @click="$emit('removeFriend', userData.uid)">Remove friend</a></li>
+        </ul>
+      </div>
 
     </div>
   </a>
@@ -42,6 +48,9 @@ export default {
     }
   },
   methods: {
+    test() {
+      console.log('heys')
+    },
     getTimeAgo(timestamp) {
       const dateNow = new Date()
       const dateMsg = new Date(timestamp)
@@ -104,5 +113,10 @@ export default {
 .recent-message {
   filter: brightness(85%);
   opacity: 0.5;
+}
+
+.recent-chat-menu-icon {
+  line-height: 56px;
+  font-size: 30px;
 }
 </style>
